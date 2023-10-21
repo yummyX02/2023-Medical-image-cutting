@@ -204,8 +204,7 @@
           </p>
         </div>
       </div>
-      <div class="upLoad" v-loading="loading"></div>
-      <div class="upLoad">
+      <div class="upLoad" v-loading="loading">
         <h3 style="color: #a38334; margin-bottom: 30px">
           若对我们的技术有兴趣，欢迎在此试用！
         </h3>
@@ -326,9 +325,13 @@ export default {
       upLoad();
     };
 
+    const apiUrl = "";
+    const requestData = "";
+
     const upLoad = async () => {
       const formData = new FormData();
       showModal.value = true;
+}
 
       if (selectedFile.value) {
         console.log("selectedFile.value", selectedFile.value.name);
@@ -344,36 +347,30 @@ export default {
 
         formData.append("username", user.value);
       }
-      if (flag.value == true) {
-        console.log("前端调用分割功能");
-        try {
-          loading.value = true;
-          const res = await axios.post(
-            common.backend_prefix + "/pubfunc",
-            formData,
-            { responseType: "blob" }
-          );
-
-          if (res.data.status == "fail") {
-            loading.value = false;
-            ElMessage.error(res.data.message);
-          } else {
-            loading.value = false;
-            let blob = new Blob([res.data], { type: res.data.type });
-            const url = URL.createObjectURL(blob);
-            segresult.value = url;
-            console.log("结果:" + segresult.value);
-            ElMessage.success("分割成功");
-            showresult.value = true;
+      if(flag.value == true){
+        console.log("前端调用分割功能")
+         try{
+            loading.value = true
+            const res = await axios.post(common.backend_prefix+"/pubfunc",formData,{responseType:'blob'})
+            
+            if(res.data.status == 'fail'){
+              loading.value = false
+              ElMessage.error(res.data.message)
+            }else{
+              loading.value = false
+              let blob  = new Blob([res.data],{type:res.data.type})
+              const url = URL.createObjectURL(blob)
+              segresult.value = url
+              console.log("结果:"+segresult.value)
+              ElMessage.success("分割成功")
+              showresult.value = true
+            }
+          }catch(error){
+            console.log(error)
+            loading.value = false
+          }finally{
+            loading.value = false
           }
-        } catch (error) {
-          console.log(error);
-          loading.value = false;
-        } finally {
-          loading.value = false;
-        }
-      } else {
-        console.log("调用startseg功能失败");
       }
     };
     const minimize = () => {
@@ -392,36 +389,37 @@ export default {
       dialogHeight.value = "80%"; // 关闭时恢复默认高度
     };
 
-    return {
-      navigateToLogin,
-      navigateToPatientInfo,
-      navigateToClassicalCase,
-      navigateToImageCut,
-      navigateToAboutView,
-      navigateToHome,
-      navigateToChat,
-      handleFileChange,
-      upLoad,
-      openFileInput,
-      minimize,
-      maximize,
-      close,
-      startSeg,
-      showModal,
-      dialogWidth,
-      dialogHeight,
-      selectedFile,
-      uploadProgress,
-      uploadError,
-      uploadSuccess,
-      showresult,
-      loading,
-      segresult,
-      text,
-      user,
-    };
-  },
-};
+        return {
+        navigateToLogin,
+        navigateToPatientInfo,
+        navigateToClassicalCase,
+        navigateToImageCut,
+        navigateToAboutView,
+        navigateToHome,
+        navigateToChat,
+        handleFileChange,
+        upLoad,
+        openFileInput,
+        minimize,
+        maximize,
+        close,
+        startSeg,
+        showModal,
+        dialogWidth,
+        dialogHeight,
+        selectedFile,
+        uploadProgress,
+        uploadError,
+        uploadSuccess,
+        showresult,
+        loading,
+        segresult,
+        text,
+        user,
+        }; 
+    }
+  }
+}
 </script>
 
 <style lang='less' scoped>
