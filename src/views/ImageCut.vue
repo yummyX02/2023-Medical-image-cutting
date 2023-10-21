@@ -320,13 +320,11 @@ export default {
       upLoad()
     }
 
-    const upLoad = async() => {
-      const formData = new FormData();
+    // const upLoad = async() => {
+    //   const formData = new FormData();
 
-    const apiUrl = "";
-    const requestData = "";
-    const upLoad = () => {
-            showModal.value = true;
+    const upLoad = async () => {
+      showModal.value = true;
 
       if (selectedFile.value) {
         console.log("selectedFile.value", selectedFile.value.name);
@@ -416,7 +414,7 @@ export default {
       user,
     };
   },
-};
+}
 </script>
 
 <style lang='less' scoped>
