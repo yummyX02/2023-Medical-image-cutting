@@ -205,7 +205,6 @@
         </div>
       </div>
       <div class="upLoad" v-loading="loading">
-      <div class="upLoad">
         <h3 style="color: #a38334; margin-bottom: 30px">
           若对我们的技术有兴趣，欢迎在此试用！
         </h3>
@@ -325,7 +324,7 @@ export default {
 
     const apiUrl = "";
     const requestData = "";
-    const upLoad = () => {
+    const upLoad = async() => {
             showModal.value = true;
 
       if (selectedFile.value) {
@@ -344,7 +343,7 @@ export default {
       }
       if(flag.value == true){
         console.log("前端调用分割功能")
-        try{
+         try{
             loading.value = true
             const res = await axios.post(common.backend_prefix+"/pubfunc",formData,{responseType:'blob'})
             
@@ -387,36 +386,37 @@ export default {
       dialogHeight.value = "80%"; // 关闭时恢复默认高度
     };
 
-    return {
-      navigateToLogin,
-      navigateToPatientInfo,
-      navigateToClassicalCase,
-      navigateToImageCut,
-      navigateToAboutView,
-      navigateToHome,
-      navigateToChat,
-      handleFileChange,
-      upLoad,
-      openFileInput,
-      minimize,
-      maximize,
-      close,
-      startSeg,
-      showModal,
-      dialogWidth,
-      dialogHeight,
-      selectedFile,
-      uploadProgress,
-      uploadError,
-      uploadSuccess,
-      showresult,
-      loading,
-      segresult,
-      text,
-      user,
-    };
-  },
-};
+        return {
+        navigateToLogin,
+        navigateToPatientInfo,
+        navigateToClassicalCase,
+        navigateToImageCut,
+        navigateToAboutView,
+        navigateToHome,
+        navigateToChat,
+        handleFileChange,
+        upLoad,
+        openFileInput,
+        minimize,
+        maximize,
+        close,
+        startSeg,
+        showModal,
+        dialogWidth,
+        dialogHeight,
+        selectedFile,
+        uploadProgress,
+        uploadError,
+        uploadSuccess,
+        showresult,
+        loading,
+        segresult,
+        text,
+        user,
+        }; 
+    }
+  }
+}
 </script>
 
 <style lang='less' scoped>
